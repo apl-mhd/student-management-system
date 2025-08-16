@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./edu-backend
+      dockerfile: Dockerfile
+
+    container_name: edu-backend
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./edu-backend:/app
+
+    restart: always
+
+  frontend:
+    build:
+      context: ./edu-frontend
+      dockerfile: Dockerfile
+
+    container_name: edu-frontend
+    ports:
+      - "8080:80"
+
+    restart: always
+
+  db:
+    image: postgres:alpine
+    container_name: edu-db
+    restart: always
+    environment:
+      POSTGRES_USER: edu_user
+      POSTGRES_PASSWORD: edu_password
+      POSTGRES_DB: edu_db
+
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    
+    ports:
+      - "5432:5432"
+
+
+
+    # environment:
+    #   - DEBUG=true
+    #   - DATABASE_URL=sqlite:///db.sqlite3
+
+    # command: python manage.py runserver 0.0.0.0:8000
