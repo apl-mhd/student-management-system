@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --base-clr: #11121a;
+    --line-clr: #42434a;
+    --hover-clr: #222533;
+    --text-clr: #e6e6ef;
+    --accent-clr: #5e63ff;
+    --secondary-text-clr: #b0b3c1;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    line-height: 1.5em;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* 
+ */
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--base-clr);
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: .3s all;
+}
+
+.sidebar .sidebar_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.6rem 1rem;
+}
+
+.sidebar .user_logo {
+    height: 2rem;
+    width: 2rem;
+}
+
+.sidebar .menubar_toggle {
+    cursor: pointer;
+    color: #fff;
+}
+
+.sidebar li {
+    margin: .5rem 0;
+    /* display: flex;
+    align-items: center; */
+    cursor: pointer;
+}
+
+.sidebar li a {
+    width: 100%;
+    border-radius: .5rem;
+    display: inline-block;
+    padding: .3rem 1rem;
+    color: #fff;
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+.sidebar li a:hover {
+    background: gray;
+    transition: .3s all ease-in-out;
+}
+
+.sidebar li i {
+    margin-right: 1.6rem;
+
+}
+
+.sidebar li a {
+    color: #fff;
+    margin-right: 10px;
+}
+
+.sub_menu {
+    max-height: 500px;
+    transition: all 0.3s ease-out;
+}
+
+.collapse_toggle {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-out;
+}
+
+
+.active {
+    /* background: gray; */
+}
+
+.main {
+    width: calc(100% - 250px);
+    overflow: hidden;
+    margin-left: 250px;
+    transition: .3s all ease-in-out;
+    padding: 1rem;
+
+}
+
+.sidebar_toogle {
+    width: 100px;
+    transition: .3s all;
+}
+
+span {
+    /* display: none; */
+}
+
+.sidebar_toogle span {
+    display: none;
+}
+
+.sidebar_toogle+.main {
+    width: calc(100% - 100px);
+    margin-left: 100px;
+    transition: .3s all ease-in-out;
+}
+
+span.history {
+   font-weight: normal;
+   text-decoration: underline;
+   cursor: pointer;
+   padding: 5px 2px;
+}
+span.history:hover{
+}
+
+/* main section */
