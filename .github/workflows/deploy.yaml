@@ -33,3 +33,20 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/edu-frontend:latest ./frontend
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/edu-frontend:latest
+
+  steps:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: deploy on EC2
+        uses: appleboy/ssh-action@v1
+
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/edu-backend:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/edu-frontend:latest
+            docker compose -f /home/${{ secrets.EC2_USER }}/docker-compose.yaml up -d
