@@ -49,4 +49,4 @@ jobs:
           script: |
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/edu-backend:latest
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/edu-frontend:latest
-            docker compose -f /home/${{ secrets.EC2_USER }}/docker-compose.yaml up -d
+            docker compose -f /home/${{ secrets.EC2_USERNAME }}/docker-compose.yaml up -d
