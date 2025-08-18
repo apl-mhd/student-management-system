@@ -22,7 +22,7 @@ jobs:
       - name: Build and push backend image
         run: |
           docker build -t aplmahmud/edu-backend:latest ./backend
-          docker push aplmahmud/edu-backend:latest
+          # docker push aplmahmud/edu-backend:latest
 
       - name: Build and push frontend image
         run: |
