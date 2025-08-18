@@ -47,6 +47,6 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/edu-backend:latest
-            sudo sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/edu-frontend:latest
-            # sudo docker compose -f /home/${{ secrets.EC2_USER }}/docker-compose.yaml up -d
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/edu-backend:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/edu-frontend:latest
+            docker compose -f /home/${{ secrets.EC2_USER }}/docker-compose.yaml up -d
