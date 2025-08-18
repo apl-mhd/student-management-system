@@ -6,7 +6,9 @@ services:
       context: ./backend
       dockerfile: Dockerfile
 
+    image: aplmahmud/edu-backend:latest
     container_name: backend
+
     ports:
       - "8000:8000"
 
@@ -20,31 +22,30 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
 
+    image: aplmahmud/edu-frontend:latest
     container_name: frontend
     ports:
-      - "8080:80"
+      - "3000:80"
 
     restart: always
 
-  db:
-    image: postgres:alpine
-    container_name: edu-db
-    restart: always
-    environment:
-      POSTGRES_USER: edu_user
-      POSTGRES_PASSWORD: edu_password
-      POSTGRES_DB: edu_db
+  # db:
+  #   image: postgres:alpine
+  #   container_name: edu-db
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: edu_user
+  #     POSTGRES_PASSWORD: edu_password
+  #     POSTGRES_DB: edu_db
 
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    
-    ports:
-      - "5432:5432"
+  #   volumes:
+  #     - db_data:/var/lib/postgresql/data
 
+  #   ports:
+  #     - "5432:5432"
 
+  # environment:
+  #   - DEBUG=true
+  #   - DATABASE_URL=sqlite:///db.sqlite3
 
-    # environment:
-    #   - DEBUG=true
-    #   - DATABASE_URL=sqlite:///db.sqlite3
-
-    # command: python manage.py runserver 0.0.0.0:8000
+  # command: python manage.py runserver 0.0.0.0:8000
