@@ -173,7 +173,7 @@ const createStudent = (studentData) => {
       })
   } else {
     apiClient
-      .post('api/students/create/', studentData)
+      .post('/students/create/', studentData)
       .then((response) => {
         showToast(response.data.message, 'success')
         resetStudent()
