@@ -163,12 +163,12 @@ const createStudent = (studentData) => {
       })
       .catch((error) => {
         const errorsList = error.response.data
-        const keys = Object.keys(errorsList)
+        // const keys = Object.keys(errorsList)
 
-        keys.forEach((i) => {
-          showToast(`${i}: ${errorsList[i][0]}`, 'warning')
-          errors.value[i] = errorsList[i][0]
-        })
+        // keys.forEach((i) => {
+        //   showToast(`${i}: ${errorsList[i][0]}`, 'warning')
+        //   errors.value[i] = errorsList[i][0]
+        // })
         isLoadingFalse()
       })
   } else {
@@ -296,16 +296,7 @@ const assignCourseModalRef = useTemplateRef('assignCourseModalRef')
   <b-overlay :show="isLoading">
     <!-- <div>{{ student }}</div> -->
     <b-collapse id="collapse-4" v-model="visible" class="mt-2 mb-5">
-      <student-create-update
-        v-model:student="student"
-        :batches="batches"
-        :academic-years="academicYears"
-        :home-towns="homeTowns"
-        :colleges="colleges"
-        :errors="errors"
-        @create-student="createStudent"
-        @reset-form="resetForm"
-      />
+      <student-create-update v-model:student="student" :batches="batches" :academic-years="academicYears" :home-towns="homeTowns" :colleges="colleges" :errors="errors" @create-student="createStudent" @reset-form="resetForm" />
     </b-collapse>
     <div class="row g-3">
       <div class="col-md-2">
@@ -323,13 +314,7 @@ const assignCourseModalRef = useTemplateRef('assignCourseModalRef')
         </select>
       </div>
       <div class="col-md-3">
-        <select
-          @change="fetchStudents()"
-          v-model="batchBy"
-          class="form-select"
-          name="course"
-          id="student-batch"
-        >
+        <select @change="fetchStudents()" v-model="batchBy" class="form-select" name="course" id="student-batch">
           <option value="">All Batch</option>
           <option v-for="batch in batches" :key="batch.id" :value="batch.id">
             {{ batch.title }}
@@ -337,23 +322,10 @@ const assignCourseModalRef = useTemplateRef('assignCourseModalRef')
         </select>
       </div>
       <div class="col-md-2">
-        <input
-          placeholder="Search..."
-          type="input"
-          v-model="q"
-          class="form-control input-sm"
-          @input="fetchStudents()"
-        />
+        <input placeholder="Search..." type="input" v-model="q" class="form-control input-sm" @input="fetchStudents()" />
       </div>
       <div class="col-auto ms-auto">
-        <b-button
-          variant="primary"
-          size="sm"
-          :class="visible ? null : 'collapsed'"
-          :aria-expanded="visible ? 'true' : 'false'"
-          aria-controls="collapse-2"
-          @click="visible = !visible"
-        >
+        <b-button variant="primary" size="sm" :class="visible ? null : 'collapsed'" :aria-expanded="visible ? 'true' : 'false'" aria-controls="collapse-2" @click="visible = !visible">
           Add Student
         </b-button>
       </div>
@@ -376,11 +348,7 @@ const assignCourseModalRef = useTemplateRef('assignCourseModalRef')
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="(i, index) in students.results"
-                :key="i.id"
-                :class="i.paid_current_month ? 'table-success' : 'table-danger'"
-              >
+              <tr v-for="(i, index) in students.results" :key="i.id" :class="i.paid_current_month ? 'table-success' : 'table-danger'">
                 <td scope="row">{{ index + 1 }}</td>
 
                 <td>
@@ -395,28 +363,18 @@ const assignCourseModalRef = useTemplateRef('assignCourseModalRef')
                 <td>{{ i.hsc_batch__year }} - {{ i.hsc_batch__year + 1 }}</td>
                 <td>{{ i.due_amount ? i.due_amount : 0 }}</td>
                 <td>
-                  <span
-                    class="me-2"
-                    v-html="
+                  <span class="me-2" v-html="
                       i.paid_current_month
                         ? `<span class='badge text-bg-primary'>Yes</span>`
                         : `<span class='badge text-bg-danger'>No</span>`
-                    "
-                  ></span>
+                    "></span>
 
-                  <span class="badge ml-3 text-bg-info" @click="fetchPayments(i)"
-                    >Payment History</span
-                  ><br />
+                  <span class="badge ml-3 text-bg-info" @click="fetchPayments(i)">Payment History</span><br />
                   <small>{{ i.latest_payment }}</small>
                 </td>
                 <td>
                   <div class="btn-group" role="group">
-                    <button
-                      type="button"
-                      class="btn btn-primary dropdown-toggle btn-sm"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
+                    <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
                       Action
                     </button>
                     <ul class="dropdown-menu">
@@ -447,18 +405,10 @@ const assignCourseModalRef = useTemplateRef('assignCourseModalRef')
             <nav aria-label="Page navigation example">
               <ul class="pagination">
                 <li class="page-item" :class="{ disabled: !students.previous }">
-                  <a class="page-link" href="#" @click.prevent="fetchStudents(students.previous)"
-                    >Previous</a
-                  >
+                  <a class="page-link" href="#" @click.prevent="fetchStudents(students.previous)">Previous</a>
                 </li>
                 <li class="page-item">
-                  <a
-                    class="page-link"
-                    href="#"
-                    :class="{ disabled: !students.next }"
-                    @click.prevent="fetchStudents(students.next)"
-                    >Next</a
-                  >
+                  <a class="page-link" href="#" :class="{ disabled: !students.next }" @click.prevent="fetchStudents(students.next)">Next</a>
                 </li>
               </ul>
             </nav>
@@ -474,25 +424,10 @@ const assignCourseModalRef = useTemplateRef('assignCourseModalRef')
     </div>
 
     <!-- modal payment history -->
-    <payment-history-modal
-      ref="paymentHistoryModalRef"
-      :student-payment-list="studentPaymentList"
-      :student-table-row="studentTableRow"
-    />
+    <payment-history-modal ref="paymentHistoryModalRef" :student-payment-list="studentPaymentList" :student-table-row="studentTableRow" />
 
-    <payment-modal
-      ref="paymentModalRef"
-      v-model:payment-form-data="paymentFormData"
-      :student-table-row="studentTableRow"
-      @create-payment="createPayment"
-    />
-    <assign-course-modal
-      ref="assignCourseModalRef"
-      v-model:courseAssignFormData="courseAssignFormData"
-      :student-table-row="studentTableRow"
-      :courses="courses"
-      @course-assign="courseAssign"
-    />
+    <payment-modal ref="paymentModalRef" v-model:payment-form-data="paymentFormData" :student-table-row="studentTableRow" @create-payment="createPayment" />
+    <assign-course-modal ref="assignCourseModalRef" v-model:courseAssignFormData="courseAssignFormData" :student-table-row="studentTableRow" :courses="courses" @course-assign="courseAssign" />
   </b-overlay>
 </template>
 

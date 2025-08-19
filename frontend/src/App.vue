@@ -16,9 +16,9 @@ import StudentView from './views/student/StudentView.vue'
         </div>
       </div>
       <ul>
-        <li class="nav_links">
+        <!-- <li class="nav_links">
           <router-link to="/"><i class="bx bxs-home"></i> <span>Home</span></router-link>
-        </li>
+        </li> -->
         <li class="nav_links">
           <router-link to="/students"><i class="bx bxs-home"></i> <span>Student</span></router-link>
         </li>
